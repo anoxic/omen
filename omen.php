@@ -1,4 +1,44 @@
 <?php
+
+/**
+ * omen_init() initializes a repository folder and stores its name
+ * @param  string $repo_name  The desired path for the repository folder
+ * @return bool
+ */
+function omen_init($repo_name = 'repo')
+{
+    omen_repo_name($repo_name);
+    if (!is_dir($repo_name))
+        return mkdir($repo_name);
+    return true;
+}
+
+/**
+ * omen_flush() removes the stored repository folder
+ * @return bool
+ */
+function omen_flush()
+{
+    $repo_name = omen_repo_name();
+    if (is_dir($repo_name))
+        return rmdir($repo_name);
+    return true;
+}
+
+/**
+ * omen_repo_name() static storage for the repository folder path
+ * @return string
+ */
+function omen_repo_name($name = null)
+{
+    static $stored;
+    if ($name !== null)
+        $stored = $name;
+    return $stored;
+}
+
+/* --- */
+
 class Status
 {
     public $ok;      // bool - whether or not the check returned OK or not
@@ -31,10 +71,6 @@ class Contact
     }
 }
 
-function omen_init()
-{
-    // initialize the folders
-}
 function omen($callable, Contact $contact)
 {
     $status = call_user_func($callable);
@@ -50,7 +86,8 @@ function omen($callable, Contact $contact)
     }
 }
 
-omen('homepage_ok', new Contact('sms', '555-555-1234', 30));
+//omen_init('last')
+//omen('homepage_ok', new Contact('sms', '555-555-1234', 30));
 
 // https://dashboard.nexmo.com/private/dashboard (sms/tts)
 // // every check (callable) must return a Status
