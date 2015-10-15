@@ -39,6 +39,16 @@ function omen_repo_name($name = null)
 
 /* --- */
 
+class Check {
+    public $name;     // a name we can refer to this check by
+    public $callable; // a callable that will run a check
+
+    public function __construct($name, $callable)
+    {
+        $this->name = $name;
+        $this->callable = $callable; // XXX: this should verify that is is callable
+    }
+}
 class Status
 {
     public $ok;      // bool - whether or not the check returned OK or not
