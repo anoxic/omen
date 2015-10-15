@@ -37,6 +37,35 @@ function omen_repo_name($name = null)
     return $stored;
 }
 
+/**
+ * omen_timestamp_filename() creates the path of a timestamp file for the $contact and $check
+ * @return string
+ */
+function omen_timestamp_filename(Check $check, Contact $contact)
+{
+    $repo =  omen_repo_name();
+    $contact->value = strtohappiness($contact->value);
+    $contact->type = strtohappiness($contact->type);
+    $check->name = strtohappiness($check->name);
+    return "$repo/{$check->name}.{$contact->type}.{$contact->value}";
+}
+
+/**
+ * strtohappiness() takes a string and makes it happy to be stored in the filesystem
+ *
+ * algorythm:
+ *   - trims whitespace and downcases the string (aware of unicode)
+ *   - replaces punctuation and whitespace with underscores
+ *
+ * @return string
+function strtohappiness($str)
+{
+    $str = trim($str);
+    $str = mb_strtolower($str);
+    $str = preg_replace('/[\p{P}\p{Z}]/', '_', $str);
+    return $str;
+}
+
 /* --- */
 
 class Check {
@@ -75,9 +104,11 @@ class Contact
 
     private function verify_type($type)
     {
+        $type = strtolower($type);
         if (!is_string($type) || !in_array($type, ['sms','tts','email'])) {
             throw new UnexpectedValueException(get_class($this) . ' expects $type to be one of "sms","tts","email"');
         }
+        return $type;
     }
 }
 
