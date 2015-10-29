@@ -58,6 +58,7 @@ function omen_timestamp_filename(Check $check, Contact $contact)
  *   - replaces punctuation and whitespace with underscores
  *
  * @return string
+ */
 function strtohappiness($str)
 {
     $str = trim($str);
