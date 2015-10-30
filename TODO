@@ -1,1 +1,20 @@
-1. set up unit testing framework
+DONE set up unit testing framework)
+DONE test omen_init() - whether it properly creates folders or not
+DONE test omen_flush() - whether it destroys folders properly or not
+DONE test omen_repo() - which stores and gets the folder name
+* test omen_store_timestamp()
+* test Contact::verify_type()
+* test omen()
+    * it calls $callable
+    * if callable returns ok, clear status
+    * if callable doesn’t
+        * save timestamp
+        * send the update
+
+types of status sends:
+omen_send_sms
+omen_send_tts
+omen_send_email
+
+
+<repo>/<check.name>.<contact.type>.<contact.value>
