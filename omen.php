@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set("UTC");
 
 /**
  * omen_init() initializes a repository folder and stores its name
@@ -137,9 +138,3 @@ function omen($callable, Contact $contact)
 //omen_init('last')
 //omen('homepage_ok', new Contact('sms', '555-555-1234', 30));
 
-// https://dashboard.nexmo.com/private/dashboard (sms/tts)
-// // every check (callable) must return a Status
-// // for each check and contact, a file is stored "last/<callable>.<contact.type>.<contact.value>"
-// // 1. on every check, if ok=true, the file is emptied
-// // 2. if false, a message is sent and the current timestamp is stored in the file
-// // 3. for each false check, if the delta between the current time and the stored is greater than the specified minutes, we do #2, otherwise nothing

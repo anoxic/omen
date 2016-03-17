@@ -1,20 +1,35 @@
-DONE set up unit testing framework)
-DONE test omen_init() - whether it properly creates folders or not
-DONE test omen_flush() - whether it destroys folders properly or not
-DONE test omen_repo() - which stores and gets the folder name
-* test omen_store_timestamp()
-* test Contact::verify_type()
+immediate items:
+
+* make omen() create the three file types
+  and test that
+
+* test contact::can_send()
+
 * test omen()
-    * it calls $callable
-    * if callable returns ok, clear status
-    * if callable doesn’t
-        * save timestamp
-        * send the update
+   *  it calls $callable
+   *  if callable returns ok, clear status
+   *  if callable doesn’t return ok
+   *  if callable doesn't return a status
 
-types of status sends:
-omen_send_sms
-omen_send_tts
-omen_send_email
+* add a loop to check for false positives
+  after 5,10,15 seconds
 
 
-<repo>/<check.name>.<contact.type>.<contact.value>
+cleanup:
+
+* use an environment var instead of omen_init to
+  determine repo name
+* remove omen_init and omen_repo_name
+* test contact::verify_type
+
+
+create default status sends:
+
+* omen_send_sms
+* omen_send_tts
+* omen_send_email
+
+
+eventually:
+
+* add some way to register custom sends

@@ -5,7 +5,8 @@ A simple status scheck that can send SMS and text-to-speach calls on failure.
 **Note:** this is in progress and not yet fully functioning. See [TODO](TODO) for more information.
 
 
-some thoughts:
+SOME THOUGHTS:
+
 
 A: we should operate in "ticks" from each error,
    which will in this case be 60 second blips
@@ -29,8 +30,29 @@ D: each check should write to it's own log file
 E: the should be a file that contains the last
    run just in case (this is so you can sanity
    check to see if omen was running)
-   
-files this creates:  
-   omen.status  
-   CHECK.status  
-   CHECK.log
+
+
+-----
+
+NOTES:
+
+
+these files are created by omen:
+
+   REPO/omen.status  
+   REPO/CHECK.status  
+   REPO/CHECK.log
+
+
+the log and status should follow
+this format:
+
+   OK <timestamp>
+   ERROR <timestamp>
+
+
+this link is so i don't forget
+where to send texts from:
+
+   https://dashboard.nexmo.com/private/dashboard (sms/tts)
+
