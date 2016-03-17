@@ -95,12 +95,14 @@ class Contact
     public $type;    // sms, tts, email
     public $value;   // the actual number or address
     public $minutes; // how many minutes between each alert
+    public $delay;   // how many minutes before beginning alerts
 
-    public function __construct($type,$value,$minutes)
+    public function __construct($type,$value,$minutes,$delay)
     {
         $this->type = $this->verify_type($type);
         $this->value = $value;
         $this->minutes = $minutes;
+        $this->delay = $delay;
     }
 
     private function verify_type($type)
@@ -110,6 +112,10 @@ class Contact
             throw new UnexpectedValueException(get_class($this) . ' expects $type to be one of "sms","tts","email"');
         }
         return $type;
+    }
+    
+    public function can_send($ticks)
+    {
     }
 }
 
