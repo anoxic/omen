@@ -15,7 +15,7 @@ class OmenTest extends PHPUnit_Framework_TestCase
     }
     public function testOmenTimestampFilename()
     {
-        $contact = new Contact('sms', '555-555-5555', 15);
+        $contact = new Contact('sms', '555-555-5555', 15, 5);
         $check   = $this->failingCheck();
 
         $this->assertEquals(
